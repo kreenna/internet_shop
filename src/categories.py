@@ -1,15 +1,18 @@
+from typing import Optional
 
 
 class Category:
+    """Класс для описания категорий товаров."""
+
     name: str
     description: str
     products: list
-    category_amount: int = 0
-    product_amount: int = 0
+    category_count: int = 0
+    product_count: int = 0
 
-    def __init__(self, name, description, products=None):
+    def __init__(self, name: str, description: str, products: Optional[list] = None):
         self.name = name
         self.description = description
         self.products = products if products else []
-        Category.category_amount += 1
-        Category.product_amount += len(products) if products else 0
+        Category.category_count += 1
+        Category.product_count += len(products) if products else 0

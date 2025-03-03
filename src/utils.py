@@ -2,7 +2,6 @@ import json
 import os
 
 from config import PATH_HOME
-
 from src.categories import Category
 from src.products import Product
 
@@ -43,3 +42,8 @@ def create_objects_from_json(data: list) -> list:
         categories.append(Category(**category))
 
     return categories
+
+
+raw_data = read_json_data("data/products.json")
+data = create_objects_from_json(raw_data)
+print(data[0].products[1].quantity)
