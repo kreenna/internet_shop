@@ -41,12 +41,12 @@ def test_category_init(reset_category_count, first_category, second_category):
     # тестируем первую категорию
     assert first_category.name == "cool thing"
     assert first_category.description == "cool stuff"
-    assert len(first_category.products) == 3
+    assert len(first_category.products.split("\n")) == 4
 
     # тестируем вторую категорию
     assert second_category.name == "uncool thing"
     assert second_category.description == "uncool stuff"
-    assert len(second_category.products) == 1
+    assert len(second_category.products.split("\n")) == 2
 
     # проверяем счетчик категорий
     assert first_category.category_count == 2
