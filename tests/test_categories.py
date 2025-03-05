@@ -1,42 +1,4 @@
-import pytest
-
-from src.categories import Category
-from src.products import Product
-
-
-@pytest.fixture(autouse=True)
-def reset_category_count():
-    Category.category_count = 0
-    Category.product_count = 0
-
-
-@pytest.fixture()
-def first_category():
-    result = Category(
-        name="cool thing",
-        description="cool stuff",
-        products=[
-            Product(name="cool soda", description="very cool soda", price=100.0, quantity=1),
-            Product(name="cool hoop", description="very cool hoop", price=100.0, quantity=1),
-            Product(name="cool drink", description="very cool drink", price=100.0, quantity=1),
-        ],
-    )
-    yield result
-
-
-@pytest.fixture()
-def second_category():
-    result = Category(
-        name="uncool thing",
-        description="uncool stuff",
-        products=[
-            Product(name="uncool ball", description="very uncool ball", price=100.0, quantity=2),
-        ],
-    )
-    yield result
-
-
-def test_category_init(reset_category_count, first_category, second_category):
+def test_category_init(reset_counts, first_category, second_category):
 
     # тестируем первую категорию
     assert first_category.name == "cool thing"
@@ -55,3 +17,17 @@ def test_category_init(reset_category_count, first_category, second_category):
     # проверяем счетчик товаров
     assert first_category.product_count == 4
     assert second_category.product_count == 4
+
+
+def test_add_product_success(reset_counts, second_category, product):  # проверяем добавление товара
+    assert second_category.product_count == 1
+
+    second_category.add_product(product)  # добавляем товар
+
+    assert len(second_category.products.split("\n")) == 3
+    assert second_category.product_count == 2
+
+
+def test_products(first_category):  # проверяем вывод списка товаров
+    assert len(first_category.products.split("\n")) == 4
+    assert first_category.products.split("\n")[0] == "cool soda, 100 руб. Остаток: 1 шт."

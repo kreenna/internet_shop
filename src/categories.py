@@ -22,8 +22,8 @@ class Category:
     def add_product(self, product: Product):
         """Метод для добавления нового товара."""
         if isinstance(product, Product):
-            self.__products.append(product)
             self.product_count += 1
+            self.__products.append(product)
 
     @property
     def products(self):

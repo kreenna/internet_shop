@@ -13,8 +13,8 @@ class Product:
         self.quantity = quantity
 
     @classmethod
-    def new_product(cls, new_product: dict, products_list: list=None):
-        """Метод для добавления нового товара."""
+    def new_product(cls, new_product: dict, products_list: list = None):
+        """Метод для добавления нового товара. Принимает словарь с данными, возвращает класс Product."""
 
         # проверяем корректность внесенных данных
         if list(new_product.keys()) == ["name", "description", "price", "quantity"]:
@@ -36,7 +36,7 @@ class Product:
             raise ValueError("Входные данные некорректны")
 
     @property
-    def price(self):
+    def price(self) -> float:
         """Геттер для показателя приватного атрибута цены."""
         return self.__price
 
