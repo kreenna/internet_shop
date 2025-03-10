@@ -42,6 +42,14 @@ def test_new_product_fail():  # проверяем, что при некорре
         Product.new_product(product_dict)
 
 
+def test_products_str(product):  # проверяем вывод описания товара
+    assert str(product) == "thing, 10 руб. Остаток: 1 шт."
+
+
+def test_products_add(product, product2):  # проверяем вывод общей цены товаров
+    assert product + product2 == 310.0
+
+
 def test_price_setter_success(product):  # успешный тест изменения цены
     product.price = 20.0
     assert product.price == 20.0
